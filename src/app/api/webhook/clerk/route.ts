@@ -1,4 +1,4 @@
-import { prisma_client } from "@/utils/DB";
+import { prisma_client } from "@/config/DB";
 import { WebhookEvent } from "@clerk/nextjs/server";
 import { Webhook } from "svix";
 const Webhook_Secret = process.env.WEBHOOK_SECRET as string;
