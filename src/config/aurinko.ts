@@ -38,7 +38,7 @@ export const exchangeCodeForAccessToken = async (
       }
     );
     const data = response.data;
-    return { accessToken: data.accessToken, accountId: data.accessId };
+    return { accessToken: data.accessToken, accountId: data.accountId };
   } catch (error) {
     const axiosError = error as AxiosError;
     console.log(
@@ -58,9 +58,9 @@ export const getAccountDetails = async (accessToken: string) => {
     });
 
     return response.data as {
-      name:string,
-      email:string
-    }
+      name: string;
+      email: string;
+    };
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.log("Axios Error", error.response?.data);
