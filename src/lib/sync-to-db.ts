@@ -10,9 +10,9 @@ export const syncEmailsToDatabase = async (
   const limit = pLimit(10);
 
   try {
-    Promise.all(
-      emails.map((email, index) => saveEmail(email, index, accountId))
-    );
+    for (const email of emails) {
+      await saveEmail(email, 0, accountId);
+    }
   } catch (error) {
     console.log("🚀 ~ syncEmailsToDatabase ~ error:", error);
   }
@@ -23,6 +23,7 @@ async function saveEmail(
   index: number,
   accountId: string
 ) {
+  
   try {
     let emailLabelType: "inbox" | "sent" | "draft" = "inbox";
 
@@ -48,7 +49,6 @@ async function saveEmail(
     ]) {
       addressToUpsert.set(address.address, address);
     }
-    console.log("🚀 ~ addressToUpsert:", addressToUpsert);
 
     const upsertedEmailAddresses: Awaited<
       ReturnType<typeof upsertEmailAddress>

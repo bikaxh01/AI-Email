@@ -30,7 +30,7 @@ export async function POST(req: Request) {
     const account = new Account(dbAccount.accessToken);
 
     const response = await account.performInitialSync();
-    console.log("🚀 ~ POST ~ response:", response);
+   
     if (!response) {
       return Response.json("Account not found", {
         status: 404,
