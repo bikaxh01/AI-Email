@@ -25,3 +25,25 @@ export async function GET(req: Request) {
     }
   );
 }
+
+export async function POST(req: Request) {
+  const body = await req.json();
+  const { accountId } = body;
+
+  if (!accountId) {
+    return Response.json({
+      message: "Invalid request",
+    });
+  }
+
+  const getAccount = await prisma_client.account.findUnique({
+    where: {
+      id: accountId,
+    },
+  });
+
+  return Response.json({
+    message: "successfully fetched account details",
+    data: getAccount,
+  });
+}

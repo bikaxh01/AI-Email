@@ -18,10 +18,15 @@ import { redirect } from "next/navigation";
 function AccountSwitcher({ isCollapsed }: { isCollapsed: Boolean }) {
   const [accounts, setAccounts] = useState<any>([]);
   const [accountId, setAccountId] = useLocalStorage("accountId", "");
+  const [tab] = useLocalStorage<"inbox" | "drafts" | "sent">(
+    "client-tab",
+    "inbox"
+  );
   useEffect(() => {
     const getAccounts = async () => {
       try {
         const response = await axios.get("/api/get-account");
+
         setAccounts(response.data.data);
       } catch (error) {
         console.log("🚀 ~ getAccounts ~ error:", error);

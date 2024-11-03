@@ -13,6 +13,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import AccountSwitcher from "./account-switcher";
 import SideBarComponent from "./sidebar";
+import useThread from "@/lib/use-thread";
+import ThreadList from "./thread-list";
+import ThreadDisplay from "./thread-display";
 
 interface MailProps {
   defaultLayout: number[] | undefined;
@@ -108,16 +111,16 @@ export default function Mail({
             <Separator />
             {/* <SearchBar /> */}
             <TabsContent value="inbox" className="m-0">
-              {/* <ThreadList /> */}
+              <ThreadList />
             </TabsContent>
             <TabsContent value="done" className="m-0">
-              {/* <ThreadList /> */}
+              <ThreadList />
             </TabsContent>
           </Tabs>
         </ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel defaultSize={defaultLayout[2]} minSize={30}>
-          {/* <ThreadDisplay /> */}
+          <ThreadDisplay />
         </ResizablePanel>
       </ResizablePanelGroup>
     </TooltipProvider>
